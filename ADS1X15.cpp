@@ -189,41 +189,6 @@ uint8_t ADS1X15::getGain()
 }
 
 
-float ADS1X15::toVoltage(int16_t value)
-{
-  if (value == 0) return 0;
-
-  float volts = getMaxVoltage();
-  if (volts < 0) return volts;    //  propagate error
-
-  volts *= value;
-  if (_config & ADS_CONF_RES_16)
-  {
-    volts /= 32767;  //  value = 16 bits - sign bit = 15 bits mantissa
-  }
-  else
-  {
-    volts /= 2047;   //  value = 12 bits - sign bit = 11 bit mantissa
-  }
-  return volts;
-}
-
-
-float ADS1X15::getMaxVoltage()
-{
-  switch (_gain)
-  {
-    case ADS1X15_PGA_6_144V: return 6.144;
-    case ADS1X15_PGA_4_096V: return 4.096;
-    case ADS1X15_PGA_2_048V: return 2.048;
-    case ADS1X15_PGA_1_024V: return 1.024;
-    case ADS1X15_PGA_0_512V: return 0.512;
-    case ADS1X15_PGA_0_256V: return 0.256;
-  }
-  _error = ADS1X15_INVALID_VOLTAGE;
-  return _error;
-}
-
 
 void ADS1X15::setMode(uint8_t mode)
 {
@@ -270,10 +235,10 @@ int16_t ADS1X15::readADC(uint8_t pin)
 }
 
 
-int16_t ADS1X15::readADC_Differential_0_1()
-{
-  return _readADC(ADS1X15_MUX_DIFF_0_1);
-}
+// int16_t ADS1X15::readADC_Differential_0_1()
+// {
+//   return _readADC(ADS1X15_MUX_DIFF_0_1);
+// }
 
 
 int16_t ADS1X15::getValue()
@@ -292,10 +257,10 @@ void ADS1X15::requestADC(uint8_t pin)
 }
 
 
-void  ADS1X15::requestADC_Differential_0_1()
-{
-  _requestADC(ADS1X15_MUX_DIFF_0_1);
-}
+// void  ADS1X15::requestADC_Differential_0_1()
+// {
+//   _requestADC(ADS1X15_MUX_DIFF_0_1);
+// }
 
 
 bool ADS1X15::isBusy()
@@ -311,94 +276,77 @@ bool ADS1X15::isReady()
 }
 
 
-uint8_t ADS1X15::lastRequest()
-{
-  switch (_lastRequest)
-  {
-    case ADS1X15_READ_0:       return 0x00;
-    case ADS1X15_READ_1:       return 0x01;
-    case ADS1X15_READ_2:       return 0x02;
-    case ADS1X15_READ_3:       return 0x03;
-    //  technically 0x01 -- but would collide with READ_1
-    case ADS1X15_MUX_DIFF_0_1: return 0x10;
-    case ADS1X15_MUX_DIFF_0_3: return 0x30;
-    case ADS1X15_MUX_DIFF_1_3: return 0x31;
-    case ADS1X15_MUX_DIFF_2_3: return 0x32;
-  }
-  return 0xFF;
-}
+
+// void ADS1X15::setComparatorMode(uint8_t mode)
+// {
+//   _compMode = mode == 0 ? 0 : 1;
+// }
 
 
-void ADS1X15::setComparatorMode(uint8_t mode)
-{
-  _compMode = mode == 0 ? 0 : 1;
-}
+// uint8_t ADS1X15::getComparatorMode()
+// {
+//   return _compMode;
+// }
 
 
-uint8_t ADS1X15::getComparatorMode()
-{
-  return _compMode;
-}
+// void ADS1X15::setComparatorPolarity(uint8_t pol)
+// {
+//   _compPol = pol == 0 ? 0 : 1;
+// }
 
 
-void ADS1X15::setComparatorPolarity(uint8_t pol)
-{
-  _compPol = pol == 0 ? 0 : 1;
-}
+// uint8_t ADS1X15::getComparatorPolarity()
+// {
+//   return _compPol;
+// }
 
 
-uint8_t ADS1X15::getComparatorPolarity()
-{
-  return _compPol;
-}
+// void ADS1X15::setComparatorLatch(uint8_t latch)
+// {
+//   _compLatch = latch == 0 ? 0 : 1;
+// }
 
 
-void ADS1X15::setComparatorLatch(uint8_t latch)
-{
-  _compLatch = latch == 0 ? 0 : 1;
-}
+// uint8_t ADS1X15::getComparatorLatch()
+// {
+//   return _compLatch;
+// }
 
 
-uint8_t ADS1X15::getComparatorLatch()
-{
-  return _compLatch;
-}
+// void ADS1X15::setComparatorQueConvert(uint8_t mode)
+// {
+//   _compQueConvert = (mode < 3) ? mode : 3;
+// }
 
 
-void ADS1X15::setComparatorQueConvert(uint8_t mode)
-{
-  _compQueConvert = (mode < 3) ? mode : 3;
-}
+// uint8_t ADS1X15::getComparatorQueConvert()
+// {
+//   return _compQueConvert;
+// }
 
 
-uint8_t ADS1X15::getComparatorQueConvert()
-{
-  return _compQueConvert;
-}
+// void ADS1X15::setComparatorThresholdLow(int16_t lo)
+// {
+//   _writeRegister(_address, ADS1X15_REG_LOW_THRESHOLD, lo);
+// }
 
 
-void ADS1X15::setComparatorThresholdLow(int16_t lo)
-{
-  _writeRegister(_address, ADS1X15_REG_LOW_THRESHOLD, lo);
-}
+// int16_t ADS1X15::getComparatorThresholdLow()
+// {
+//   return _readRegister(_address, ADS1X15_REG_LOW_THRESHOLD);
+// };
 
 
-int16_t ADS1X15::getComparatorThresholdLow()
-{
-  return _readRegister(_address, ADS1X15_REG_LOW_THRESHOLD);
-};
+// void ADS1X15::setComparatorThresholdHigh(int16_t hi)
+// {
+//   _writeRegister(_address, ADS1X15_REG_HIGH_THRESHOLD, hi);
+// };
 
 
-void ADS1X15::setComparatorThresholdHigh(int16_t hi)
-{
-  _writeRegister(_address, ADS1X15_REG_HIGH_THRESHOLD, hi);
-};
-
-
-int16_t ADS1X15::getComparatorThresholdHigh()
-{
-  return _readRegister(_address, ADS1X15_REG_HIGH_THRESHOLD);
-};
+// int16_t ADS1X15::getComparatorThresholdHigh()
+// {
+//   return _readRegister(_address, ADS1X15_REG_HIGH_THRESHOLD);
+// };
 
 
 int8_t ADS1X15::getError()
@@ -538,166 +486,6 @@ uint16_t ADS1X15::_readRegister(uint8_t address, uint8_t reg)
 
 
 
-///////////////////////////////////////////////////////////////////////////
-//
-//  DERIVED CLASSES
-//
-
-
-///////////////////////////////////////////////////////////////////////////
-//
-//  ADS1013
-//
-ADS1013::ADS1013(uint8_t address, TwoWire *wire)
-{
-  _address = address;
-  _wire = wire;
-  _config = ADS_CONF_NOCOMP | ADS_CONF_NOGAIN | ADS_CONF_RES_12 | ADS_CONF_CHAN_1;
-  _conversionDelay = ADS_1015_CONVERSION_DELAY;
-  _bitShift = 4;
-  _maxPorts = 1;
-  _gain     = ADS1X15_PGA_2_048V;  //  fixed value
-}
-
-
-//  ADS1x13 has no gain so set default.
-//  Table 8. Config Register Field Descriptions
-void ADS1013::setGain(uint8_t gain)
-{
-  _gain = gain;  //  keep compiler happy.
-  _gain = ADS1X15_PGA_2_048V;  //  fixed value
-}
-
-
-uint8_t ADS1013::getGain()
-{
-  return 2;  //  fixed value
-}
-
-
-///////////////////////////////////////////////////////////////////////////
-//
-//  ADS1014
-//
-ADS1014::ADS1014(uint8_t address, TwoWire *wire)
-{
-  _address = address;
-  _wire = wire;
-  _config = ADS_CONF_COMP | ADS_CONF_GAIN | ADS_CONF_RES_12 | ADS_CONF_CHAN_1;
-  _conversionDelay = ADS_1015_CONVERSION_DELAY;
-  _bitShift = 4;
-  _maxPorts = 1;
-}
-
-
-///////////////////////////////////////////////////////////////////////////
-//
-//  ADS_1015
-//
-ADS_1015::ADS_1015(uint8_t address, TwoWire *wire)
-{
-  _address = address;
-  _wire = wire;
-  _config = ADS_CONF_COMP | ADS_CONF_GAIN | ADS_CONF_RES_12 | ADS_CONF_CHAN_4;
-  _conversionDelay = ADS_1015_CONVERSION_DELAY;
-  _bitShift = 4;
-  _maxPorts = 4;
-}
-
-
-int16_t ADS_1015::readADC_Differential_0_3()
-{
-  return _readADC(ADS1X15_MUX_DIFF_0_3);
-}
-
-
-int16_t ADS_1015::readADC_Differential_1_3()
-{
-  return _readADC(ADS1X15_MUX_DIFF_1_3);
-}
-
-
-int16_t ADS_1015::readADC_Differential_2_3()
-{
-  return _readADC(ADS1X15_MUX_DIFF_2_3);
-}
-
-
-int16_t ADS_1015::readADC_Differential_0_2()
-{
-  return readADC(2) - readADC(0);
-}
-
-
-int16_t ADS_1015::readADC_Differential_1_2()
-{
-  return readADC(2) - readADC(1);;
-}
-
-
-void ADS_1015::requestADC_Differential_0_3()
-{
-  _requestADC(ADS1X15_MUX_DIFF_0_3);
-}
-
-
-void ADS_1015::requestADC_Differential_1_3()
-{
-  _requestADC(ADS1X15_MUX_DIFF_1_3);
-}
-
-
-void ADS_1015::requestADC_Differential_2_3()
-{
-  _requestADC(ADS1X15_MUX_DIFF_2_3);
-}
-
-
-///////////////////////////////////////////////////////////////////////////
-//
-//  ADS1113
-//
-ADS1113::ADS1113(uint8_t address, TwoWire *wire)
-{
-  _address = address;
-  _wire = wire;
-  _config = ADS_CONF_NOCOMP | ADS_CONF_NOGAIN | ADS_CONF_RES_16 | ADS_CONF_CHAN_1;
-  _conversionDelay = ADS_1115_CONVERSION_DELAY;
-  _bitShift = 0;
-  _maxPorts = 1;
-  _gain     = ADS1X15_PGA_2_048V;  //  fixed value
-}
-
-
-//  ADS1x13 has no gain so set default.
-//  Table 8. Config Register Field Descriptions
-void ADS1113::setGain(uint8_t gain)
-{
-  _gain = gain;  //  keep compiler happy.
-  _gain = ADS1X15_PGA_2_048V;  //  fixed value
-}
-
-
-uint8_t ADS1113::getGain()
-{
-  return 2;  //  fixed value
-}
-
-
-///////////////////////////////////////////////////////////////////////////
-//
-//  ADS1114
-//
-ADS1114::ADS1114(uint8_t address, TwoWire *wire)
-{
-  _address = address;
-  _wire = wire;
-  _config = ADS_CONF_COMP | ADS_CONF_GAIN | ADS_CONF_RES_16 | ADS_CONF_CHAN_1;
-  _conversionDelay = ADS_1115_CONVERSION_DELAY;
-  _bitShift = 0;
-  _maxPorts = 1;
-}
-
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -714,52 +502,52 @@ ADS_1115::ADS_1115(uint8_t address, TwoWire *wire)
 }
 
 
-int16_t ADS_1115::readADC_Differential_0_3()
-{
-  return _readADC(ADS1X15_MUX_DIFF_0_3);
-}
+// int16_t ADS_1115::readADC_Differential_0_3()
+// {
+//   return _readADC(ADS1X15_MUX_DIFF_0_3);
+// }
 
 
-int16_t ADS_1115::readADC_Differential_1_3()
-{
-  return _readADC(ADS1X15_MUX_DIFF_1_3);
-}
+// int16_t ADS_1115::readADC_Differential_1_3()
+// {
+//   return _readADC(ADS1X15_MUX_DIFF_1_3);
+// }
 
 
-int16_t ADS_1115::readADC_Differential_2_3()
-{
-  return _readADC(ADS1X15_MUX_DIFF_2_3);
-}
+// int16_t ADS_1115::readADC_Differential_2_3()
+// {
+//   return _readADC(ADS1X15_MUX_DIFF_2_3);
+// }
 
 
-int16_t ADS_1115::readADC_Differential_0_2()
-{
-  return readADC(2) - readADC(0);
-}
+// int16_t ADS_1115::readADC_Differential_0_2()
+// {
+//   return readADC(2) - readADC(0);
+// }
 
 
-int16_t ADS_1115::readADC_Differential_1_2()
-{
-  return readADC(2) - readADC(1);;
-}
+// int16_t ADS_1115::readADC_Differential_1_2()
+// {
+//   return readADC(2) - readADC(1);;
+// }
 
 
-void ADS_1115::requestADC_Differential_0_3()
-{
-  _requestADC(ADS1X15_MUX_DIFF_0_3);
-}
+// void ADS_1115::requestADC_Differential_0_3()
+// {
+//   _requestADC(ADS1X15_MUX_DIFF_0_3);
+// }
 
 
-void ADS_1115::requestADC_Differential_1_3()
-{
-  _requestADC(ADS1X15_MUX_DIFF_1_3);
-}
+// void ADS_1115::requestADC_Differential_1_3()
+// {
+//   _requestADC(ADS1X15_MUX_DIFF_1_3);
+// }
 
 
-void ADS_1115::requestADC_Differential_2_3()
-{
-  _requestADC(ADS1X15_MUX_DIFF_2_3);
-}
+// void ADS_1115::requestADC_Differential_2_3()
+// {
+//   _requestADC(ADS1X15_MUX_DIFF_2_3);
+// }
 
 
 //  -- END OF FILE --

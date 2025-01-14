@@ -2,7 +2,8 @@
 
 Build #       - Description of Change
 
-25011402      - Removed superflous files from repo
+25011403      - Removed superfluous methods from code
+25011402      - Removed superflouos files from repo
 25011401      - Renamed classes to prevent clash with DIYFB code
               - Forked to https://github.com/DeeEmm/ADS1115_lite
               - Forked from https://github.com/RobTillaart/ADS1X15

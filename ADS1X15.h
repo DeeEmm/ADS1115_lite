@@ -203,57 +203,6 @@ protected:
 };
 
 
-///////////////////////////////////////////////////////////////////////////
-//
-//  DERIVED CLASSES from ADS1X15
-//
-class ADS1013 : public ADS1X15
-{
-public:
-  ADS1013(uint8_t Address = ADS_1015_ADDRESS, TwoWire *wire = &Wire);
-  void setGain(uint8_t gain);
-  uint8_t getGain();
-};
-
-
-class ADS1014 : public ADS1X15
-{
-public:
-  ADS1014(uint8_t Address = ADS_1015_ADDRESS, TwoWire *wire = &Wire);
-};
-
-
-class ADS_1015 : public ADS1X15
-{
-public:
-  ADS_1015(uint8_t Address = ADS_1015_ADDRESS, TwoWire *wire = &Wire);
-  int16_t  readADC_Differential_0_3();
-  int16_t  readADC_Differential_1_3();
-  int16_t  readADC_Differential_2_3();
-  int16_t  readADC_Differential_0_2();   //  not possible in async
-  int16_t  readADC_Differential_1_2();   //  not possible in async
-  void     requestADC_Differential_0_3();
-  void     requestADC_Differential_1_3();
-  void     requestADC_Differential_2_3();
-};
-
-
-class ADS1113 : public ADS1X15
-{
-public:
-  ADS1113(uint8_t address = ADS_1115_ADDRESS, TwoWire *wire = &Wire);
-  void setGain(uint8_t gain);
-  uint8_t getGain();
-};
-
-
-class ADS1114 : public ADS1X15
-{
-public:
-  ADS1114(uint8_t address = ADS_1115_ADDRESS, TwoWire *wire = &Wire);
-};
-
-
 class ADS_1115 : public ADS1X15
 {
 public:
