@@ -85,10 +85,10 @@ differs for different devices, check datasheet or readme.md
 #define ADS1X15_COMP_LATCH              0x0004
 
 //  BIT 0-1 ALERT mode                       //  (0..3)
-#define ADS1X15_COMP_QUE_1_CONV         0x0000  //  trigger alert after 1 convert
-#define ADS1X15_COMP_QUE_2_CONV         0x0001  //  trigger alert after 2 converts
-#define ADS1X15_COMP_QUE_4_CONV         0x0002  //  trigger alert after 4 converts
-#define ADS1X15_COMP_QUE_NONE           0x0003  //  disable comparator
+// #define ADS1X15_COMP_QUE_1_CONV         0x0000  //  trigger alert after 1 convert
+// #define ADS1X15_COMP_QUE_2_CONV         0x0001  //  trigger alert after 2 converts
+// #define ADS1X15_COMP_QUE_4_CONV         0x0002  //  trigger alert after 4 converts
+// #define ADS1X15_COMP_QUE_NONE           0x0003  //  disable comparator
 
 
 //  _CONFIG masks
@@ -104,13 +104,13 @@ differs for different devices, check datasheet or readme.md
 //  |   6   |  -                     |
 //  |   7   |  -                     |
 //
-#define ADS_CONF_CHAN_1  0x00
+// #define ADS_CONF_CHAN_1  0x00
 #define ADS_CONF_CHAN_4  0x01
-#define ADS_CONF_RES_12  0x00
+// #define ADS_CONF_RES_12  0x00
 #define ADS_CONF_RES_16  0x04
-#define ADS_CONF_NOGAIN  0x00
+// #define ADS_CONF_NOGAIN  0x00
 #define ADS_CONF_GAIN    0x10
-#define ADS_CONF_NOCOMP  0x00
+// #define ADS_CONF_NOCOMP  0x00
 #define ADS_CONF_COMP    0x20
 
 
@@ -203,16 +203,16 @@ void ADS1X15::setMode(uint8_t mode)
 }
 
 
-uint8_t ADS1X15::getMode(void)
-{
-  switch (_mode)
-  {
-    case ADS1X15_MODE_CONTINUE: return 0;
-    case ADS1X15_MODE_SINGLE:   return 1;
-  }
-  _error = ADS1X15_INVALID_MODE;
-  return _error;
-}
+// uint8_t ADS1X15::getMode(void)
+// {
+//   switch (_mode)
+//   {
+//     case ADS1X15_MODE_CONTINUE: return 0;
+//     case ADS1X15_MODE_SINGLE:   return 1;
+//   }
+//   _error = ADS1X15_INVALID_MODE;
+//   return _error;
+// }
 
 
 void ADS1X15::setDataRate(uint8_t dataRate)
@@ -223,10 +223,10 @@ void ADS1X15::setDataRate(uint8_t dataRate)
 }
 
 
-uint8_t ADS1X15::getDataRate(void)
-{
-  return (_datarate >> 5) & 0x07;  //  convert mask back to 0..7
-}
+// uint8_t ADS1X15::getDataRate(void)
+// {
+//   return (_datarate >> 5) & 0x07;  //  convert mask back to 0..7
+// }
 
 
 int16_t ADS1X15::readADC(uint8_t pin)
@@ -359,38 +359,38 @@ int8_t ADS1X15::getError()
 }
 
 
-//////////////////////////////////////////////////////
-//
-//  EXPERIMENTAL
-//
-void ADS1X15::setWireClock(uint32_t clockSpeed)
-{
-  _clockSpeed = clockSpeed;
-  _wire->setClock(_clockSpeed);
-}
+// //////////////////////////////////////////////////////
+// //
+// //  EXPERIMENTAL
+// //
+// void ADS1X15::setWireClock(uint32_t clockSpeed)
+// {
+//   _clockSpeed = clockSpeed;
+//   _wire->setClock(_clockSpeed);
+// }
 
-//  see https://github.com/RobTillaart/ADS1X15/issues/22
-//      https://github.com/arduino/Arduino/issues/11457
-//  TODO: get the real clock speed from the I2C interface if possible.
-uint32_t ADS1X15::getWireClock()
-{
-//  UNO 328 and
-#if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
-  uint32_t speed = F_CPU / ((TWBR * 2) + 16);
-  return speed;
+// //  see https://github.com/RobTillaart/ADS1X15/issues/22
+// //      https://github.com/arduino/Arduino/issues/11457
+// //  TODO: get the real clock speed from the I2C interface if possible.
+// uint32_t ADS1X15::getWireClock()
+// {
+// //  UNO 328 and
+// #if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
+//   uint32_t speed = F_CPU / ((TWBR * 2) + 16);
+//   return speed;
 
-#elif defined(ESP32)
-  return (uint32_t) _wire->getClock();
+// #elif defined(ESP32)
+//   return (uint32_t) _wire->getClock();
 
-//  #elif defined(ESP8266)
-//  core_esp8266_si2c.cpp holds the data see => void Twi::setClock(
-//  not supported.
-//  return -1;
+// //  #elif defined(ESP8266)
+// //  core_esp8266_si2c.cpp holds the data see => void Twi::setClock(
+// //  not supported.
+// //  return -1;
 
-#else  //  best effort is remembering it
-  return _clockSpeed;
-#endif
-}
+// #else  //  best effort is remembering it
+//   return _clockSpeed;
+// #endif
+// }
 
 
 //////////////////////////////////////////////////////

@@ -12,14 +12,6 @@
 #include "Arduino.h"
 #include "Wire.h"
 
-#define ADS1X15_LIB_VERSION               (F("0.5.1"))
-
-//  allow compile time default address
-//  address in { 0x48, 0x49, 0x4A, 0x4B }, no test...
-#ifndef ADS_1015_ADDRESS
-#define ADS_1015_ADDRESS                   0x48
-#endif
-
 #ifndef ADS_1115_ADDRESS
 #define ADS_1115_ADDRESS                   0x48
 #endif
@@ -45,11 +37,11 @@
 #define ADS1x15_COMP_MODE_TRADITIONAL     0x00
 #define ADS1x15_COMP_MODE_WINDOW          0x01
 
-#define ADS1x15_COMP_POL_FALLING_EDGE     0x00
-#define ADS1x15_COMP_POL_RISING_EDGE      0x01
+// #define ADS1x15_COMP_POL_FALLING_EDGE     0x00
+// #define ADS1x15_COMP_POL_RISING_EDGE      0x01
 
-#define ADS1x15_COMP_POL_LATCH            0x00
-#define ADS1x15_COMP_POL_NOLATCH          0x01
+// #define ADS1x15_COMP_POL_LATCH            0x00
+// #define ADS1x15_COMP_POL_NOLATCH          0x01
 
 
 
@@ -72,26 +64,21 @@ public:
   uint8_t  getGain();                    //  0xFF == invalid gain error.
 
 
-  //  both may return ADS1X15_INVALID_VOLTAGE if the gain is invalid.
-  float    toVoltage(int16_t value = 1); //   converts raw to voltage
-  float    getMaxVoltage();              //   -100 == invalid voltage error
-
-
   //  0  =  CONTINUOUS
   //  1  =  SINGLE       default
   void     setMode(uint8_t mode = 1);    //  invalid values are mapped to 1 (default)
-  uint8_t  getMode();                    //  0xFE == invalid mode error.
+  // uint8_t  getMode();                    //  0xFE == invalid mode error.
 
 
   //  0  =  slowest
   //  7  =  fastest
   //  4  =  default
   void     setDataRate(uint8_t dataRate = 4);  //  invalid values are mapped on 4 (default)
-  uint8_t  getDataRate();                      //  actual speed depends on device
+  // uint8_t  getDataRate();                      //  actual speed depends on device
 
 
   int16_t  readADC(uint8_t pin = 0);
-  int16_t  readADC_Differential_0_1();
+  // int16_t  readADC_Differential_0_1();
 
   //  used by continuous mode and async mode.
   //  [[deprecated("Use getValue() instead")]]
@@ -103,56 +90,50 @@ public:
   //  requestADC(pin) -> isBusy() or isReady() -> getValue();
   //  see examples
   void     requestADC(uint8_t pin = 0);
-  void     requestADC_Differential_0_1();
+  // void     requestADC_Differential_0_1();
   bool     isBusy();
   bool     isReady();
-
-
-  //  returns a pin 0x0[0..3] or
-  //          a differential "mode" 0x[pin second][pin first] or
-  //          0xFF (no request / invalid request)
-  uint8_t   lastRequest();
 
 
   //  COMPARATOR
   //  0    = TRADITIONAL   > high          => on      < low   => off
   //  else = WINDOW        > high or < low => on      between => off
-  void     setComparatorMode(uint8_t mode);
-  uint8_t  getComparatorMode();
+  // void     setComparatorMode(uint8_t mode);
+  // uint8_t  getComparatorMode();
 
   //  0    = LOW (default)
   //  else = HIGH
-  void     setComparatorPolarity(uint8_t pol);
-  uint8_t  getComparatorPolarity();
+  // void     setComparatorPolarity(uint8_t pol);
+  // uint8_t  getComparatorPolarity();
 
   //  0    = NON LATCH
   //  else = LATCH
-  void     setComparatorLatch(uint8_t latch);
-  uint8_t  getComparatorLatch();
+  // void     setComparatorLatch(uint8_t latch);
+  // uint8_t  getComparatorLatch();
 
   //  0   = trigger alert after 1 conversion
   //  1   = trigger alert after 2 conversions
   //  2   = trigger alert after 4 conversions
   //  3   = Disable comparator =  default, also for all other values.
-  void     setComparatorQueConvert(uint8_t mode);
-  uint8_t  getComparatorQueConvert();
+  // void     setComparatorQueConvert(uint8_t mode);
+  // uint8_t  getComparatorQueConvert();
 
-  void     setComparatorThresholdLow(int16_t lo);
-  int16_t  getComparatorThresholdLow();
-  void     setComparatorThresholdHigh(int16_t hi);
-  int16_t  getComparatorThresholdHigh();
+  // void     setComparatorThresholdLow(int16_t lo);
+  // int16_t  getComparatorThresholdLow();
+  // void     setComparatorThresholdHigh(int16_t hi);
+  // int16_t  getComparatorThresholdHigh();
 
 
   int8_t   getError();
 
 
-  //  EXPERIMENTAL
-  //  see https://github.com/RobTillaart/ADS1X15/issues/22
-  void     setWireClock(uint32_t clockSpeed = 100000);
-  //  prototype
-  //  - getWireClock returns the value set by setWireClock
-  //    not necessary the actual value
-  uint32_t getWireClock();
+  // //  EXPERIMENTAL
+  // //  see https://github.com/RobTillaart/ADS1X15/issues/22
+  // void     setWireClock(uint32_t clockSpeed = 100000);
+  // //  prototype
+  // //  - getWireClock returns the value set by setWireClock
+  // //    not necessary the actual value
+  // uint32_t getWireClock();
 
 
 protected:
