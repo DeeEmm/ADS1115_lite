@@ -1,13 +1,13 @@
 #pragma once
 //
-//    FILE: ADS1X15.h
-//  AUTHOR: Rob Tillaart
-// VERSION: 0.5.1
-//    DATE: 2013-03-24
-// PURPOSE: Arduino library for ADS_1015 and ADS_1115
-//     URL: https://github.com/RobTillaart/ADS1X15
-//
-
+//        FILE: ADS1X15.cpp
+//      AUTHOR: DeeEmm
+//     VERSION: See changelog
+//        DATE: 2025-01-14
+//     PURPOSE: Arduino library for ADS_1115 
+//         URL: https://github.com/DeeEmm/ADS1115_lite
+// FORKED FROM: https://github.com/RobTillaart/ADS1X15
+//         FOR: DIYFB Project - https://github.com/DeeEmm/DIY-Flow-Bench
 
 #include "Arduino.h"
 #include "Wire.h"
