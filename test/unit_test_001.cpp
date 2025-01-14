@@ -37,7 +37,7 @@ unittest_teardown()
 
 unittest(test_constants_I)
 {
-  assertEqual(0x48, ADS1015_ADDRESS);
+  assertEqual(0x48, ADS_1015_ADDRESS);
   assertEqual(0x48, ADS_1115_ADDRESS);
 
   assertEqual(   0, ADS1X15_OK);

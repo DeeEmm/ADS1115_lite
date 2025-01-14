@@ -3,14 +3,14 @@
 //  AUTHOR: Rob Tillaart
 // VERSION: 0.5.1
 //    DATE: 2013-03-24
-// PURPOSE: Arduino library for ADS1015 and ADS_1115
+// PURPOSE: Arduino library for ADS_1015 and ADS_1115
 //     URL: https://github.com/RobTillaart/ADS1X15
 
 
 #include "ADS1X15.h"
 
 
-#define ADS1015_CONVERSION_DELAY    1
+#define ADS_1015_CONVERSION_DELAY    1
 #define ADS_1115_CONVERSION_DELAY    8
 
 
@@ -553,7 +553,7 @@ ADS1013::ADS1013(uint8_t address, TwoWire *wire)
   _address = address;
   _wire = wire;
   _config = ADS_CONF_NOCOMP | ADS_CONF_NOGAIN | ADS_CONF_RES_12 | ADS_CONF_CHAN_1;
-  _conversionDelay = ADS1015_CONVERSION_DELAY;
+  _conversionDelay = ADS_1015_CONVERSION_DELAY;
   _bitShift = 4;
   _maxPorts = 1;
   _gain     = ADS1X15_PGA_2_048V;  //  fixed value
@@ -584,7 +584,7 @@ ADS1014::ADS1014(uint8_t address, TwoWire *wire)
   _address = address;
   _wire = wire;
   _config = ADS_CONF_COMP | ADS_CONF_GAIN | ADS_CONF_RES_12 | ADS_CONF_CHAN_1;
-  _conversionDelay = ADS1015_CONVERSION_DELAY;
+  _conversionDelay = ADS_1015_CONVERSION_DELAY;
   _bitShift = 4;
   _maxPorts = 1;
 }
@@ -592,62 +592,62 @@ ADS1014::ADS1014(uint8_t address, TwoWire *wire)
 
 ///////////////////////////////////////////////////////////////////////////
 //
-//  ADS1015
+//  ADS_1015
 //
-ADS1015::ADS1015(uint8_t address, TwoWire *wire)
+ADS_1015::ADS_1015(uint8_t address, TwoWire *wire)
 {
   _address = address;
   _wire = wire;
   _config = ADS_CONF_COMP | ADS_CONF_GAIN | ADS_CONF_RES_12 | ADS_CONF_CHAN_4;
-  _conversionDelay = ADS1015_CONVERSION_DELAY;
+  _conversionDelay = ADS_1015_CONVERSION_DELAY;
   _bitShift = 4;
   _maxPorts = 4;
 }
 
 
-int16_t ADS1015::readADC_Differential_0_3()
+int16_t ADS_1015::readADC_Differential_0_3()
 {
   return _readADC(ADS1X15_MUX_DIFF_0_3);
 }
 
 
-int16_t ADS1015::readADC_Differential_1_3()
+int16_t ADS_1015::readADC_Differential_1_3()
 {
   return _readADC(ADS1X15_MUX_DIFF_1_3);
 }
 
 
-int16_t ADS1015::readADC_Differential_2_3()
+int16_t ADS_1015::readADC_Differential_2_3()
 {
   return _readADC(ADS1X15_MUX_DIFF_2_3);
 }
 
 
-int16_t ADS1015::readADC_Differential_0_2()
+int16_t ADS_1015::readADC_Differential_0_2()
 {
   return readADC(2) - readADC(0);
 }
 
 
-int16_t ADS1015::readADC_Differential_1_2()
+int16_t ADS_1015::readADC_Differential_1_2()
 {
   return readADC(2) - readADC(1);;
 }
 
 
-void ADS1015::requestADC_Differential_0_3()
+void ADS_1015::requestADC_Differential_0_3()
 {
   _requestADC(ADS1X15_MUX_DIFF_0_3);
 }
 
 
-void ADS1015::requestADC_Differential_1_3()
+void ADS_1015::requestADC_Differential_1_3()
 {
   _requestADC(ADS1X15_MUX_DIFF_1_3);
 }
 
 
-void ADS1015::requestADC_Differential_2_3()
+void ADS_1015::requestADC_Differential_2_3()
 {
   _requestADC(ADS1X15_MUX_DIFF_2_3);
 }

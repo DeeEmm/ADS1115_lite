@@ -10,7 +10,7 @@
 //  - connect potmeters to all channels
 //  - code reads both at the same frequency
 //    and calculates differential per pair.
-//    as 2 ADC's go in parallel, two ADS1015 should get
+//    as 2 ADC's go in parallel, two ADS_1015 should get
 //    3000+ differential samples / second.
 //
 

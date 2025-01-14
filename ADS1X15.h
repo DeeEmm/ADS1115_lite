@@ -4,7 +4,7 @@
 //  AUTHOR: Rob Tillaart
 // VERSION: 0.5.1
 //    DATE: 2013-03-24
-// PURPOSE: Arduino library for ADS1015 and ADS_1115
+// PURPOSE: Arduino library for ADS_1015 and ADS_1115
 //     URL: https://github.com/RobTillaart/ADS1X15
 //
 
@@ -16,8 +16,8 @@
 
 //  allow compile time default address
 //  address in { 0x48, 0x49, 0x4A, 0x4B }, no test...
-#ifndef ADS1015_ADDRESS
-#define ADS1015_ADDRESS                   0x48
+#ifndef ADS_1015_ADDRESS
+#define ADS_1015_ADDRESS                   0x48
 #endif
 
 #ifndef ADS_1115_ADDRESS
@@ -210,7 +210,7 @@ protected:
 class ADS1013 : public ADS1X15
 {
 public:
-  ADS1013(uint8_t Address = ADS1015_ADDRESS, TwoWire *wire = &Wire);
+  ADS1013(uint8_t Address = ADS_1015_ADDRESS, TwoWire *wire = &Wire);
   void setGain(uint8_t gain);
   uint8_t getGain();
 };
@@ -219,14 +219,14 @@ public:
 class ADS1014 : public ADS1X15
 {
 public:
-  ADS1014(uint8_t Address = ADS1015_ADDRESS, TwoWire *wire = &Wire);
+  ADS1014(uint8_t Address = ADS_1015_ADDRESS, TwoWire *wire = &Wire);
 };
 
 
-class ADS1015 : public ADS1X15
+class ADS_1015 : public ADS1X15
 {
 public:
-  ADS1015(uint8_t Address = ADS1015_ADDRESS, TwoWire *wire = &Wire);
+  ADS_1015(uint8_t Address = ADS_1015_ADDRESS, TwoWire *wire = &Wire);
   int16_t  readADC_Differential_0_3();
   int16_t  readADC_Differential_1_3();
   int16_t  readADC_Differential_2_3();

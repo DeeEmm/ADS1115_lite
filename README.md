@@ -11,7 +11,7 @@
 
 # ADS1X15
 
-Arduino library for I2C ADC ADS1015, ADS_1115, and similar.
+Arduino library for I2C ADC ADS_1015, ADS_1115, and similar.
 
 For using I2C ADC with Raspberry pi or other SBC with Linux OS,
 you can check similar library [here](https://github.com/chandrawi/ADS1x15-ADC).
@@ -26,13 +26,13 @@ although not all sensors support all functionality.
 |:---------:|:----------:|:------------:|:---------:|:------------:|:------------:|:-------------:|:---------|
 |  ADS1013  |      1     |       12     |    3300   |       N      |       N      |        N      |          |
 |  ADS1014  |      1     |       12     |    3300   |       Y      |       Y      |        Y      |          |
-|  ADS1015  |      4     |       12     |    3300   |       Y      |       Y      |        Y      |          |
+|  ADS_1015  |      4     |       12     |    3300   |       Y      |       Y      |        Y      |          |
 |  ADS1113  |      1     |       16     |    860    |       N      |       N      |        N      |          |
 |  ADS1114  |      1     |       16     |    860    |       Y      |       Y      |        Y      |          |
 |  ADS_1115  |      4     |       16     |    860    |       Y      |       Y      |        Y      |  Tested  |
 
 
-As the ADS1015 and the ADS_1115 are both 4 channels these are the most
+As the ADS_1015 and the ADS_1115 are both 4 channels these are the most
 interesting from functionality point of view as these can do
 differential measurements.
 
@@ -126,7 +126,7 @@ To initialize the library you must call a constructor as described below.
 and optional the Wire interface as parameter.
 - **ADS1014(uint8_t address, TwoWire \*wire = &Wire)** Constructor with device address,
 and optional the Wire interface as parameter.
-- **ADS1015(uint8_t address, TwoWire \*wire = &Wire)** Constructor with device address,
+- **ADS_1015(uint8_t address, TwoWire \*wire = &Wire)** Constructor with device address,
 and optional the Wire interface as parameter.
 - **ADS1113(uint8_t address, TwoWire \*wire = &Wire)** Constructor with device address,
 and optional the Wire interface as parameter.
