@@ -6,7 +6,7 @@
 //     URL: https://github.com/RobTillaart/ADS1X15
 
 //  test
-//  connect multiple potmeters to 2 ADS1115
+//  connect multiple potmeters to 2 ADS_1115
 //
 //  GND ---[   x   ]------ 5V
 //             |
@@ -22,8 +22,8 @@
 
 
 //  adjust addresses if needed
-ADS1115 ADS_1(0x49);
-ADS1115 ADS_2(0x48);
+ADS_1115 ADS_1(0x49);
+ADS_1115 ADS_2(0x48);
 
 //  two interrupt flags
 volatile bool RDY_1 = false;
@@ -45,7 +45,7 @@ void setup()
 
   Wire.begin();
 
-  //  SETUP FIRST ADS1115
+  //  SETUP FIRST ADS_1115
   ADS_1.begin();
   ADS_1.setGain(0);        //  6.144 volt
   ADS_1.setDataRate(7);    //  0 = slow   4 = medium   7 = fast
@@ -63,7 +63,7 @@ void setup()
   ADS_1.readADC(channel_1);  //  trigger first read
 
 
-  //  SETUP SECOND ADS1115
+  //  SETUP SECOND ADS_1115
   ADS_2.begin();
   ADS_2.setGain(0);          //  6.144 volt
   ADS_2.setDataRate(7);

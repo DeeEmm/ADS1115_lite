@@ -25,7 +25,7 @@
 // ADS1113 ADS(0x48);
 // ADS1114 ADS(0x48);
 
-ADS1115 ADS(0x48);
+ADS_1115 ADS(0x48);
 
 
 void setup() 

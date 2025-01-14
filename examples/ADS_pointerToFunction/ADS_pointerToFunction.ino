@@ -10,7 +10,7 @@
 #include "ADS1X15.h"
 
 //  adjust address if needed
-ADS1115 ADS(0x48);  
+ADS_1115 ADS(0x48);  
 
 //  pointer to ADC function
 int (*readADC)(uint8_t);  

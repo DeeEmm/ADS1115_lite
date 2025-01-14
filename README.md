@@ -11,7 +11,7 @@
 
 # ADS1X15
 
-Arduino library for I2C ADC ADS1015, ADS1115, and similar.
+Arduino library for I2C ADC ADS1015, ADS_1115, and similar.
 
 For using I2C ADC with Raspberry pi or other SBC with Linux OS,
 you can check similar library [here](https://github.com/chandrawi/ADS1x15-ADC).
@@ -29,10 +29,10 @@ although not all sensors support all functionality.
 |  ADS1015  |      4     |       12     |    3300   |       Y      |       Y      |        Y      |          |
 |  ADS1113  |      1     |       16     |    860    |       N      |       N      |        N      |          |
 |  ADS1114  |      1     |       16     |    860    |       Y      |       Y      |        Y      |          |
-|  ADS1115  |      4     |       16     |    860    |       Y      |       Y      |        Y      |  Tested  |
+|  ADS_1115  |      4     |       16     |    860    |       Y      |       Y      |        Y      |  Tested  |
 
 
-As the ADS1015 and the ADS1115 are both 4 channels these are the most
+As the ADS1015 and the ADS_1115 are both 4 channels these are the most
 interesting from functionality point of view as these can do
 differential measurements.
 
@@ -132,7 +132,7 @@ and optional the Wire interface as parameter.
 and optional the Wire interface as parameter.
 - **ADS1114(uint8_t address, TwoWire \*wire = &Wire)** Constructor with device address,
 and optional the Wire interface as parameter.
-- **ADS1115(uint8_t address, TwoWire \*wire = &Wire)** Constructor with device address,
+- **ADS_1115(uint8_t address, TwoWire \*wire = &Wire)** Constructor with device address,
 and optional the Wire interface as parameter.
 
 
@@ -148,14 +148,14 @@ For example.
 ```cpp
   #include "ADS1X15.h"
 
-  //  initialize ADS1115 on I2C bus 1 with default address 0x48
-  ADS1115 ADS(0x48);
+  //  initialize ADS_1115 on I2C bus 1 with default address 0x48
+  ADS_1115 ADS(0x48);
 
   void setup() 
   {
     if (!ADS.begin()) 
     {
-      //  invalid address ADS1115 or 0x48 not found
+      //  invalid address ADS_1115 or 0x48 not found
     }
     if (!ADS.isConnected()) 
     {
@@ -442,7 +442,7 @@ This explicit stop takes extra time, however it should prevent "incorrect" readi
 ### Threshold registers
 
 (datasheet 9.3.8)  
-_Conversion Ready Pin (ADS1114 and ADS1115 Only)
+_Conversion Ready Pin (ADS1114 and ADS_1115 Only)
 The ALERT/RDY pin can also be configured as a conversion ready pin. Set the most-significant bit of the
 Hi_thresh register to 1 and the most-significant bit of Lo_thresh register to 0 to enable the pin as a conversion
 ready pin._

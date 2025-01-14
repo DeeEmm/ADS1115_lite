@@ -38,7 +38,7 @@ unittest_teardown()
 unittest(test_constants_I)
 {
   assertEqual(0x48, ADS1015_ADDRESS);
-  assertEqual(0x48, ADS1115_ADDRESS);
+  assertEqual(0x48, ADS_1115_ADDRESS);
 
   assertEqual(   0, ADS1X15_OK);
   assertEqual(-100, ADS1X15_INVALID_VOLTAGE);
@@ -51,7 +51,7 @@ unittest(test_constants_I)
 
 unittest(test_begin)
 {
-  ADS1115 ADS(0x48);
+  ADS_1115 ADS(0x48);
 
   Wire.begin();
 
@@ -63,7 +63,7 @@ unittest(test_begin)
 
 unittest(test_gain)
 {
-  ADS1115 ADS(0x48);
+  ADS_1115 ADS(0x48);
 
   Wire.begin();
 
@@ -108,7 +108,7 @@ unittest(test_gain_ADS1113)
 
 unittest(test_voltage)
 {
-  ADS1115 ADS(0x48);
+  ADS_1115 ADS(0x48);
 
   Wire.begin();
 
@@ -149,7 +149,7 @@ unittest(test_voltage)
 
 unittest(test_mode)
 {
-  ADS1115 ADS(0x48);
+  ADS_1115 ADS(0x48);
 
   Wire.begin();
   assertTrue(ADS.begin());
@@ -169,7 +169,7 @@ unittest(test_mode)
 
 unittest(test_datarate)
 {
-  ADS1115 ADS(0x48);
+  ADS_1115 ADS(0x48);
 
   Wire.begin();
   assertTrue(ADS.begin());
@@ -190,7 +190,7 @@ unittest(test_datarate)
 
 unittest(test_comparator_mode)
 {
-  ADS1115 ADS(0x48);
+  ADS_1115 ADS(0x48);
 
   Wire.begin();
   assertTrue(ADS.begin());
@@ -210,7 +210,7 @@ unittest(test_comparator_mode)
 
 unittest(test_comparator_polarity)
 {
-  ADS1115 ADS(0x48);
+  ADS_1115 ADS(0x48);
 
   Wire.begin();
   assertTrue(ADS.begin());
@@ -230,7 +230,7 @@ unittest(test_comparator_polarity)
 
 unittest(test_comparator_latch)
 {
-  ADS1115 ADS(0x48);
+  ADS_1115 ADS(0x48);
 
   Wire.begin();
   assertTrue(ADS.begin());
@@ -250,7 +250,7 @@ unittest(test_comparator_latch)
 
 unittest(test_comparator_que_convert)
 {
-  ADS1115 ADS(0x48);
+  ADS_1115 ADS(0x48);
 
   Wire.begin();
   assertTrue(ADS.begin());

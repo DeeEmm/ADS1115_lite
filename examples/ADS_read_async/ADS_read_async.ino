@@ -16,7 +16,7 @@
 
 #include "ADS1X15.h"
 
-ADS1115 ADS(0x48);
+ADS_1115 ADS(0x48);
 float f = 0;
 int16_t val_0;
 

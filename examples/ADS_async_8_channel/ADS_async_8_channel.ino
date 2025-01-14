@@ -1,7 +1,7 @@
 //
 //    FILE: ADS_async_8_channel.ino
 //  AUTHOR: Rob Tillaart
-// PURPOSE: demo reading two ADS1115 modules in parallel
+// PURPOSE: demo reading two ADS_1115 modules in parallel
 //     URL: https://github.com/RobTillaart/ADS1X15
 
 
@@ -14,10 +14,10 @@
 #include "ADS1X15.h"
 
 
-ADS1115 ADS0(0x48);
-ADS1115 ADS1(0x49);
-// ADS1115 ADS2(0x4A);
-// ADS1115 ADS3(0x4B);
+ADS_1115 ADS0(0x48);
+ADS_1115 ADS1(0x49);
+// ADS_1115 ADS2(0x4A);
+// ADS_1115 ADS3(0x4B);
 
 int16_t val0[4] = { 0, 0, 0, 0 };
 int16_t val1[4] = { 0, 0, 0, 0 };

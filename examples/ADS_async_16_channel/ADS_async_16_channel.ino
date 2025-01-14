@@ -1,7 +1,7 @@
 //
 //    FILE: ADS_async_16_channel.ino
 //  AUTHOR: Rob Tillaart
-// PURPOSE: demo reading four ADS1115 modules in parallel
+// PURPOSE: demo reading four ADS_1115 modules in parallel
 //     URL: https://github.com/RobTillaart/ADS1X15
 
 
@@ -14,7 +14,7 @@
 #include "ADS1X15.h"
 
 
-ADS1115 ADS[4];
+ADS_1115 ADS[4];
 uint16_t val[16];
 int idx = 0;
 
@@ -33,7 +33,7 @@ void setup()
   for (uint8_t i = 0; i < 4; i++)
   {
     uint8_t address = 0x48 + i;
-    ADS[i] = ADS1115(address);
+    ADS[i] = ADS_1115(address);
 
     Serial.print(address, HEX);
     Serial.print("  ");
