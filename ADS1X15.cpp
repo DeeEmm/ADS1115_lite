@@ -13,8 +13,7 @@
 
 
 #define ADS_1015_CONVERSION_DELAY    1
-#define ADS_1115_CONVERSION_DELAY    8
-
+#define ADS_1115_CONVERSION_DELAY    (((1.0 / _datarate) * 1.1 + 0.00002) * 1e6); // Texas Instruments Timing Delay
 
 //  Kept #defines a bit in line with Adafruit library.
 
@@ -404,28 +403,36 @@ int16_t ADS1X15::_readADC(uint16_t readmode)
 
   if (_mode == ADS1X15_MODE_SINGLE)
   {
-    uint32_t start = millis();
-    //  timeout == { 138, 74, 42, 26, 18, 14, 12, 11 }
-    //  added 10 ms more than maximum conversion time from datasheet.
-    //  to prevent premature timeout in RTOS context.
-    //  See #82
-    uint8_t timeOut = (128 >> (_datarate >> 5)) + 10;
-    while (isBusy())
-    {
-      if ( (millis() - start) > timeOut)
-      {
-        _error = ADS1X15_ERROR_TIMEOUT;
-        return ADS1X15_ERROR_TIMEOUT;
+    uint32_t start = micros();
+    uint16_t timeOut = (_conversionDelay);
+     // Wait for the ADC conversion to complete, based on the timeout (using the conversion delay).
+    while (micros() - start < timeOut) {
+        yield();  // Yield for ESP or any other microcontroller to do other tasks during this wait.
       }
-      yield();   //  wait for conversion; yield for ESP.
+
+      // Check if the conversion was completed in time
+    if (micros() - start < timeOut) {
+       //Handle timeout if necessary
+      _error = ADS1X15_ERROR_TIMEOUT;
+      return ADS1X15_ERROR_TIMEOUT;
     }
-  }
   else
-  {
-    //  needed in continuous mode too, otherwise one get an old value.
-    delay(_conversionDelay);
+    {
+
+    // For continuous mode, you can implement a non-blocking wait.
+    uint32_t start = micros();
+    uint16_t timeOut = (_conversionDelay);
+
+    // Non-blocking delay using micros()
+    while (micros() - start < timeOut) {
+        yield();  // Allow other tasks to run during the wait.
+    }
+    
+    }
+     // After waiting, return the ADC value once
+      return getValue();
   }
-  return getValue();
+
 }
 
 
