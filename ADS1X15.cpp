@@ -13,7 +13,7 @@
 
 
 #define ADS_1015_CONVERSION_DELAY    1
-#define ADS_1115_CONVERSION_DELAY    (((1.0 / _datarate) * 1.1 + 0.00002) * 1e6); // Texas Instruments Timing Delay
+#define ADS_1115_CONVERSION_DELAY    (((1.0 / _datarate) * 1.1 + 0.00002) * 1e6) - 3613.75; // Texas Instruments Timing Delay
 
 //  Kept #defines a bit in line with Adafruit library.
 
