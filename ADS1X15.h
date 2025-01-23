@@ -152,7 +152,7 @@ protected:
   uint8_t  _config;
   uint8_t  _maxPorts;
   uint8_t  _address;
-  uint16_t  _conversionDelay;
+  uint8_t  _conversionDelay;
   uint8_t  _bitShift;
   uint16_t _gain;
   uint16_t _mode;
